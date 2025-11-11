@@ -1,0 +1,59 @@
+{
+  "project_name": "Van Every Family Chiropractic Mastermind Dashboard",
+  "notion_pages": {
+    "main_template": "2a380ff9-d4f5-817b-8a11-eca658f9a815",
+    "dr_zach_prototype": "2a380ff9-d4f5-816b-891b-cd522e7fff7d"
+  },
+  "team_members": [
+    {
+      "name": "Dr. Saylor",
+      "role": "Doctor",
+      "dashboard_id": "2a380ff9-d4f5-8140-9d26-fdebf99a052e",
+      "icon": "👩‍⚕️"
+    },
+    {
+      "name": "Dr. Zach",
+      "role": "Doctor",
+      "dashboard_id": "2a380ff9-d4f5-816b-891b-cd522e7fff7d",
+      "icon": "👨‍⚕️",
+      "note": "Using prototype as his main dashboard"
+    },
+    {
+      "name": "Dr. John",
+      "role": "Doctor",
+      "dashboard_id": "2a380ff9-d4f5-8154-b667-d97bcd507a48",
+      "icon": "👨‍⚕️"
+    },
+    {
+      "name": "Lou Ann",
+      "role": "Staff",
+      "dashboard_id": "2a380ff9-d4f5-81b4-a9de-e09becd3e14d",
+      "icon": "👩‍💼"
+    },
+    {
+      "name": "Christina",
+      "role": "Staff",
+      "dashboard_id": "2a380ff9-d4f5-81d7-a9ae-ea4e5dd36f98",
+      "icon": "👩‍💼"
+    },
+    {
+      "name": "Tricia",
+      "role": "Staff",
+      "dashboard_id": "2a380ff9-d4f5-81ed-b2d1-dfcd22e3c66b",
+      "icon": "👩‍💼"
+    },
+    {
+      "name": "Windy",
+      "role": "Staff",
+      "dashboard_id": "2a380ff9-d4f5-81e3-88f4-eb1b663d1ab1",
+      "icon": "👩‍💼"
+    }
+  ],
+  "core_databases": {
+    "tasks": "2a380ff9d4f58138942bf525def45ba0",
+    "projects": "2a380ff9d4f581aab5e7ff996f31a40b",
+    "business_goals": "2a380ff9d4f58181897cee4255a9385b",
+    "resources_documents": "2a380ff9d4f581e695a9cc090918e073",
+    "meetings": "2a380ff9d4f581468537e6e63fc6d0b6"
+  }
+}

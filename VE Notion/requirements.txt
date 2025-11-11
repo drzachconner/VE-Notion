@@ -1,0 +1,8 @@
+# Notion API Client
+notion-client==2.2.1
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Utilities
+requests==2.31.0

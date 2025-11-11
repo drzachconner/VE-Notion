@@ -1,0 +1,4 @@
+Event ID,Title,Date,Time,Duration (mins),Attendees,Location,Type,Status,Related Project,Agenda,Notes Link,Recording Link
+EVENT-001,Weekly Team Standup,2025-11-11,09:00:00,30,"Dr. Saylor, Dr. Zach, Dr. John, Lou Ann",Conference Room A,Meeting,Scheduled,,Weekly updates and blockers,https://notion.so/...,
+EVENT-002,Patient Care Review,2025-11-13,14:00:00,60,"Dr. Saylor, Dr. Zach",Zoom,Meeting,Scheduled,Patient Care Initiative,Review new protocols,https://notion.so/...,
+EVENT-003,Q4 Planning Retreat,2025-11-20,13:00:00,240,"Dr. Saylor, Dr. Zach, Dr. John, Lou Ann, Christina, Tricia, Windy",Offsite Venue,Event,Scheduled,,Strategic planning for Q4,https://notion.so/...,

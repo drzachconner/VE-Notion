@@ -1,0 +1,322 @@
+{
+  "name": "VE: Google Sheets → Notion Sync",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start-node",
+      "name": "When clicking 'Test workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "10RohggAvh8Rv1iMYELcajUaDgEjLARBN8GsojFrU3QA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Tasks",
+          "mode": "list"
+        },
+        "range": "Tasks!A:R",
+        "options": {}
+      },
+      "id": "sheets-read",
+      "name": "Get Tasks from Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "VE Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.Task_Name }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "filter-empty",
+      "name": "Filter Empty Rows",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": "bcfd55b779f14c8ab19f6a26128e4abb",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "notion-get-all",
+      "name": "Get All Notion Tasks",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR_NOTION_CREDENTIAL_ID",
+          "name": "VE Notion"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Match Google Sheets tasks with Notion tasks by Task ID\nconst sheetsData = $input.first().json;\nconst notionData = $input.last().json;\n\n// Create map of Notion tasks by Task ID\nconst notionMap = {};\nfor (const item of notionData) {\n  const taskId = item.properties?.['Task ID']?.title?.[0]?.plain_text || '';\n  if (taskId) {\n    notionMap[taskId] = item;\n  }\n}\n\n// Check if this sheet task exists in Notion\nconst sheetTaskId = sheetsData.Task_ID;\nconst existsInNotion = notionMap[sheetTaskId];\n\nreturn {\n  json: {\n    ...sheetsData,\n    existsInNotion: !!existsInNotion,\n    notionPageId: existsInNotion?.id || null\n  }\n};"
+      },
+      "id": "check-exists",
+      "name": "Check if Task Exists in Notion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.existsInNotion }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "route-create-update",
+      "name": "Route: Create or Update",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1340, 300]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "databaseId": "bcfd55b779f14c8ab19f6a26128e4abb",
+        "title": "={{ $json.Task_Name }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Task ID",
+              "textContent": "={{ $json.Task_ID }}"
+            },
+            {
+              "key": "Team Member",
+              "selectValue": "={{ $json.Team_Member }}"
+            },
+            {
+              "key": "Due Date",
+              "dateValue": "={{ $json.Due_Date }}"
+            },
+            {
+              "key": "Priority",
+              "selectValue": "={{ $json.Priority }}"
+            },
+            {
+              "key": "Status",
+              "selectValue": "={{ $json.Status }}"
+            },
+            {
+              "key": "Type",
+              "selectValue": "={{ $json.Type }}"
+            },
+            {
+              "key": "Time Estimate (hrs)",
+              "numberValue": "={{ $json.Time_Estimate_hrs }}"
+            }
+          ]
+        }
+      },
+      "id": "notion-create",
+      "name": "Create Task in Notion",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [1560, 200],
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR_NOTION_CREDENTIAL_ID",
+          "name": "VE Notion"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": "={{ $json.notionPageId }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Team Member",
+              "selectValue": "={{ $json.Team_Member }}"
+            },
+            {
+              "key": "Due Date",
+              "dateValue": "={{ $json.Due_Date }}"
+            },
+            {
+              "key": "Priority",
+              "selectValue": "={{ $json.Priority }}"
+            },
+            {
+              "key": "Status",
+              "selectValue": "={{ $json.Status }}"
+            },
+            {
+              "key": "Time Estimate (hrs)",
+              "numberValue": "={{ $json.Time_Estimate_hrs }}"
+            }
+          ]
+        }
+      },
+      "id": "notion-update",
+      "name": "Update Task in Notion",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [1560, 400],
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR_NOTION_CREDENTIAL_ID",
+          "name": "VE Notion"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "channel": "YOUR_SLACK_CHANNEL_ID",
+        "text": "✅ Synced {{ $json.Task_Name }} to Notion",
+        "otherOptions": {}
+      },
+      "id": "slack-confirm",
+      "name": "Send Slack Confirmation",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [1780, 300],
+      "credentials": {
+        "slackApi": {
+          "id": "YOUR_SLACK_CREDENTIAL_ID",
+          "name": "VE Slack"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking 'Test workflow'": {
+      "main": [
+        [
+          {
+            "node": "Get Tasks from Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tasks from Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Filter Empty Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Empty Rows": {
+      "main": [
+        [
+          {
+            "node": "Get All Notion Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Notion Tasks": {
+      "main": [
+        [
+          {
+            "node": "Check if Task Exists in Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Task Exists in Notion": {
+      "main": [
+        [
+          {
+            "node": "Route: Create or Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route: Create or Update": {
+      "main": [
+        [
+          {
+            "node": "Update Task in Notion",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Task in Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Task in Notion": {
+      "main": [
+        [
+          {
+            "node": "Send Slack Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Task in Notion": {
+      "main": [
+        [
+          {
+            "node": "Send Slack Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-11-09T00:00:00.000Z",
+  "versionId": "1"
+}

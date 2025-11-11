@@ -1,0 +1,4 @@
+Task ID,Task Name,Team Member,Assigned To,Due Date,Priority,Status,Related Project,Tags,Type,Meetings,Recurring,Time Estimate (hrs),Created Date,Completed Date,Notes,Slack Thread URL,Notion URL
+TASK-001,Sample Task - Review patient protocols,Dr. Zach,,2025-11-15,High,In Progress,Patient Care Initiative,"Clinical, Training",Task,,No,2.5,2025-11-09,,This is a sample task to demonstrate the structure,https://slack.com/archives/C123/p456,
+TASK-002,Update marketing materials,Christina,,2025-11-12,Medium,Not Started,Marketing Q4,Marketing,Task,,No,4,2025-11-09,,Sample marketing task,,
+TASK-003,Schedule team meeting,Lou Ann,,2025-11-10,Low,Done,,,Task,,No,0.5,2025-11-08,2025-11-09,Completed sample task,,
