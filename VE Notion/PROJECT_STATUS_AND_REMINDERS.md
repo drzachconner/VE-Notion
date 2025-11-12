@@ -131,7 +131,7 @@ Automate the import of ChiroTouch exported reports directly into Google Sheets "
 
 ### Notion Integration:
 - **Name:** Van Every Daily Sync
-- **API Key:** `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`
+- **API Key:** `[STORED IN .env FILE - DO NOT COMMIT]`
 - **Database ID (DAILY_STATS):** `693c4a0a9a534b07a19be8981c7d6027`
 
 ### Google Sheets:

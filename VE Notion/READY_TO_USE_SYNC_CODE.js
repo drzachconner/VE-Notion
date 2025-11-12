@@ -19,8 +19,10 @@
 // ===============================================
 
 const CONFIG = {
-  // ✅ Your Notion API Key (configured)
-  NOTION_API_KEY: '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',
+  // 🔐 SECURITY: Replace with your actual Notion API Key
+  // Get it from: https://www.notion.so/my-integrations
+  // NEVER commit this file with real keys to version control!
+  NOTION_API_KEY: 'YOUR_NOTION_API_KEY_HERE',
 
   // ✅ Your DAILY_STATS Database ID (configured)
   DAILY_STATS_DATABASE_ID: '693c4a0a9a534b07a19be8981c7d6027',
