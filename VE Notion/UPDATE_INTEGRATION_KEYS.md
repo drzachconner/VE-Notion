@@ -182,7 +182,7 @@ A: Yes, technically. But having two is cleaner and more secure (principle of lea
 **Q: What if I see "unauthorized" errors?**
 A: Make sure:
 1. You updated the key in both places
-2. VHSD is connected to the database/page you're accessing
+2. The correct integration is connected to the database/page you're accessing
 3. The key was copied correctly (no extra spaces)
 
 **Q: Should I rotate/refresh the keys?**
