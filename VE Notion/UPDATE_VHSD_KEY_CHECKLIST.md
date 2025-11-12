@@ -1,16 +1,27 @@
-# VHSD Integration Key Update Checklist
+# Van Every Integration Keys Update Checklist
 
 **Date:** November 12, 2025
-**Integration:** VHSD (your only Notion integration)
+**Integrations:**
+- Claude VE MCP (Python scripts)
+- Van Every Daily Sync (Google Sheets sync)
 
 ---
 
 ## ✅ What You Need To Do
 
-### 1. Copy Your New VHSD Key
-You already rotated the key at https://www.notion.so/my-integrations
+### 1. Get/Refresh Both Integration Keys
 
-**Copy the new key from the VHSD integration page**
+Go to https://www.notion.so/my-integrations
+
+**Integration 1: Claude VE MCP**
+- Used by: Python scripts (dashboard builders)
+- Click "Show" (or "Refresh secret" for security)
+- Copy the key
+
+**Integration 2: Van Every Daily Sync**
+- Used by: Google Sheets → Notion sync
+- Click "Show" (or "Refresh secret" for security)
+- Copy the key
 
 ---
 
@@ -18,14 +29,9 @@ You already rotated the key at https://www.notion.so/my-integrations
 
 Open: `P:\Dr. Zach\VE Notion\VE Notion\.env`
 
-Replace line 2:
+Replace line 2 with **Claude VE MCP** key:
 ```
-NOTION_API_KEY=PASTE_YOUR_NEW_VHSD_KEY_HERE
-```
-
-With:
-```
-NOTION_API_KEY=your_actual_new_key_here
+NOTION_API_KEY=paste_claude_ve_mcp_key_here
 ```
 
 **This is used by:**
@@ -46,9 +52,9 @@ NOTION_API_KEY=your_actual_new_key_here
 NOTION_API_KEY: 'YOUR_NOTION_API_KEY_HERE',
 ```
 
-**Replace with:**
+**Replace with Van Every Daily Sync key:**
 ```javascript
-NOTION_API_KEY: 'your_actual_new_key_here',
+NOTION_API_KEY: 'paste_van_every_daily_sync_key_here',
 ```
 
 **This is used by:**
@@ -57,27 +63,27 @@ NOTION_API_KEY: 'your_actual_new_key_here',
 
 ---
 
-### 4. Verify VHSD Has Access to All Pages/Databases
+### 4. Verify Integrations Have Access to Required Databases
 
-In Notion, make sure VHSD integration is connected to:
+In Notion, make sure integrations are connected correctly:
 
-**Databases:**
-- ✅ DAILY_STATS (ID: 693c4a0a9a534b07a19be8981c7d6027)
+**Van Every Daily Sync needs access to:**
+- ✅ DAILY_STATS database (ID: 693c4a0a9a534b07a19be8981c7d6027)
+
+**Claude VE MCP needs access to:**
 - ✅ Tasks (ID: 2a380ff9d4f58138942bf525def45ba0)
 - ✅ Projects (ID: 2a380ff9d4f581aab5e7ff996f31a40b)
 - ✅ Business Goals (ID: 2a380ff9d4f58181897cee4255a9385b)
 - ✅ Resources & Documents (ID: 2a380ff9d4f581e695a9cc090918e073)
 - ✅ Meetings (ID: 2a380ff9d4f581468537e6e63fc6d0b6)
-
-**Pages:**
-- ✅ Main Template (2a380ff9-d4f5-817b-8a11-eca658f9a815)
+- ✅ Main Template page (2a380ff9-d4f5-817b-8a11-eca658f9a815)
 - ✅ All 7 team member dashboards
 
 **How to check:**
 1. Open each database/page in Notion
 2. Click "..." menu → "Connections"
-3. Make sure "VHSD" is listed
-4. If not, click "Add connection" → Select "VHSD"
+3. Make sure the correct integration is listed
+4. If not, click "Add connection" → Select the integration
 
 ---
 
@@ -102,11 +108,12 @@ Should connect successfully without errors.
 
 ## 📋 Checklist Summary
 
-- [ ] Copy new VHSD key from https://www.notion.so/my-integrations
-- [ ] Update `.env` file (line 2)
-- [ ] Update Google Apps Script (line 25)
-- [ ] Verify VHSD connected to all 6 databases
-- [ ] Verify VHSD connected to all pages
+- [ ] Get Claude VE MCP key from https://www.notion.so/my-integrations
+- [ ] Get Van Every Daily Sync key from https://www.notion.so/my-integrations
+- [ ] Update `.env` file with Claude VE MCP key (line 2)
+- [ ] Update Google Apps Script with Van Every Daily Sync key (line 25)
+- [ ] Verify Van Every Daily Sync connected to DAILY_STATS database
+- [ ] Verify Claude VE MCP connected to all 5 databases + dashboards
 - [ ] Test Python scripts work
 - [ ] Test Google Sheets sync works
 - [ ] Commit and push to GitHub
@@ -139,36 +146,38 @@ git push origin main
 
 ---
 
-## What VHSD Does
+## What Each Integration Does
 
-**VHSD is your ONE integration that handles:**
+**You have TWO integrations with different purposes:**
 
-1. **Google Sheets → Notion Sync**
-   - Reads from "Clinic Totals" sheet
-   - Writes to DAILY_STATS database
-   - Runs daily at 8pm
+### Van Every Daily Sync:
+- Reads from Google Sheets "Clinic Totals"
+- Writes to DAILY_STATS database
+- Runs automatically daily at 8pm
+- Used by: Google Apps Script
 
-2. **Python Dashboard Builders**
-   - Creates/updates team dashboards
-   - Manages 5 core databases
-   - Builds project structure
+### Claude VE MCP:
+- Creates/updates team dashboards
+- Manages 5 core databases (Tasks, Projects, etc.)
+- Builds project structure
+- Used by: Python scripts
 
-3. **Future Integrations**
-   - Slack → Notion (when implemented)
-   - Google Drive connections
-   - Notion Calendar sync
+### Future:
+- Slack integration (will use one of these)
+- Google Drive connections
+- Notion Calendar sync
 
-**You DO NOT need multiple integrations.** VHSD handles everything.
+**Why two integrations?** Separation of concerns - if one breaks, the other still works!
 
 ---
 
 ## Questions?
 
-**Q: Why did the .env say "Claude VE MCP"?**
-A: That was an old/incorrect comment. It's always been VHSD.
+**Q: Why two integrations instead of one?**
+A: Best practice - separate concerns. Google Sheets sync only needs access to DAILY_STATS, while Python scripts need broader access. If one breaks, the other keeps working.
 
-**Q: Do I need to create separate integrations for different features?**
-A: No! One integration (VHSD) can access multiple databases and pages. Just make sure it's connected to all the pages/databases you need.
+**Q: Can I use just one integration for everything?**
+A: Yes, technically. But having two is cleaner and more secure (principle of least privilege).
 
 **Q: What if I see "unauthorized" errors?**
 A: Make sure:
@@ -176,8 +185,8 @@ A: Make sure:
 2. VHSD is connected to the database/page you're accessing
 3. The key was copied correctly (no extra spaces)
 
-**Q: Can I rename VHSD to something clearer?**
-A: Yes! In Notion integrations settings, you can rename it to "Van Every Integration" or whatever makes sense. The key stays the same.
+**Q: Should I rotate/refresh the keys?**
+A: Yes! Since the old key was exposed in git history (before we removed it), refresh both keys for security.
 
 ---
 
