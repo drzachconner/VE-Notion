@@ -1,5 +1,5 @@
 {
-  "project_name": "Van Every Family Chiropractic Mastermind Dashboard",
+  "project_name": "Van Every Family Chiropractic Task & Project Management",
   "notion_pages": {
     "main_template": "2a380ff9-d4f5-817b-8a11-eca658f9a815",
     "dr_zach_prototype": "2a380ff9-d4f5-816b-891b-cd522e7fff7d"
@@ -9,51 +9,54 @@
       "name": "Dr. Saylor",
       "role": "Doctor",
       "dashboard_id": "2a380ff9-d4f5-8140-9d26-fdebf99a052e",
-      "icon": "👩‍⚕️"
+      "icon": "\ud83d\udc69\u200d\u2695\ufe0f"
     },
     {
       "name": "Dr. Zach",
       "role": "Doctor",
       "dashboard_id": "2a380ff9-d4f5-816b-891b-cd522e7fff7d",
-      "icon": "👨‍⚕️",
+      "icon": "\ud83d\udc68\u200d\u2695\ufe0f",
       "note": "Using prototype as his main dashboard"
     },
     {
       "name": "Dr. John",
       "role": "Doctor",
       "dashboard_id": "2a380ff9-d4f5-8154-b667-d97bcd507a48",
-      "icon": "👨‍⚕️"
+      "icon": "\ud83d\udc68\u200d\u2695\ufe0f"
     },
     {
       "name": "Lou Ann",
       "role": "Staff",
       "dashboard_id": "2a380ff9-d4f5-81b4-a9de-e09becd3e14d",
-      "icon": "👩‍💼"
+      "icon": "\ud83d\udc69\u200d\ud83d\udcbc"
     },
     {
       "name": "Christina",
       "role": "Staff",
       "dashboard_id": "2a380ff9-d4f5-81d7-a9ae-ea4e5dd36f98",
-      "icon": "👩‍💼"
+      "icon": "\ud83d\udc69\u200d\ud83d\udcbc"
     },
     {
       "name": "Tricia",
       "role": "Staff",
       "dashboard_id": "2a380ff9-d4f5-81ed-b2d1-dfcd22e3c66b",
-      "icon": "👩‍💼"
+      "icon": "\ud83d\udc69\u200d\ud83d\udcbc"
     },
     {
-      "name": "Windy",
+      "name": "Wendy",
       "role": "Staff",
       "dashboard_id": "2a380ff9-d4f5-81e3-88f4-eb1b663d1ab1",
-      "icon": "👩‍💼"
+      "icon": "\ud83d\udc69\u200d\ud83d\udcbc"
     }
   ],
   "core_databases": {
     "tasks": "2a380ff9d4f58138942bf525def45ba0",
     "projects": "2a380ff9d4f581aab5e7ff996f31a40b",
-    "business_goals": "2a380ff9d4f58181897cee4255a9385b",
-    "resources_documents": "2a380ff9d4f581e695a9cc090918e073",
     "meetings": "2a380ff9d4f581468537e6e63fc6d0b6"
+  },
+  "ultimate_tasks_databases": {
+    "tasks": "2aa80ff9-d4f5-81dd-a5a8-d2de086962da",
+    "projects": "2aa80ff9-d4f5-8103-8d80-decf1a6990dc",
+    "events": "2aa80ff9-d4f5-8145-bed8-e80e84ed58bc"
   }
 }

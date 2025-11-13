@@ -53,43 +53,7 @@ MY PROJECTS
 [Count number from Projects database filtered to you]
 ```
 
-#### 2. Add "My Performance Metrics" Tracking Cards
-
-**Location:** Under the "📈 My Performance Metrics" heading
-
-**Steps:**
-1. Delete the placeholder callout box
-2. Type `/column` and create a 3-column layout
-3. In each column, add a callout block:
-
-**Column 1 - Goals Progress:**
-```
-Icon: 🎯
-Background: Green
-Content:
-GOALS PROGRESS
-X of Y goals on track
-```
-
-**Column 2 - Completed Tasks:**
-```
-Icon: ✅
-Background: Blue
-Content:
-TASKS COMPLETED
-X tasks this month
-```
-
-**Column 3 - Upcoming Milestones:**
-```
-Icon: 🏁
-Background: Orange
-Content:
-UPCOMING MILESTONES
-Next: [Milestone name]
-```
-
-#### 3. Add "My Tasks" Linked Database
+#### 2. Add "My Tasks" Linked Database
 
 **Location:** Under the "✅ My Tasks" heading
 
@@ -107,7 +71,7 @@ Next: [Milestone name]
    - Sort by: Priority (descending)
    - Then by: Due Date (ascending)
 
-#### 4. Add "My Meetings" Linked Database
+#### 3. Add "My Meetings" Linked Database
 
 **Location:** Under the "📅 My Meetings" heading
 
@@ -124,7 +88,7 @@ Next: [Milestone name]
 7. Add sorts (optional):
    - Sort by: Date (ascending)
 
-#### 5. Add "My Projects" Linked Database
+#### 4. Add "My Projects" Linked Database
 
 **Location:** Under the "🎯 My Projects" heading
 
@@ -142,16 +106,15 @@ Next: [Milestone name]
    - Sort by: Status (custom order)
    - Then by: Priority (descending)
 
-#### 6. Update Quick Links
+#### 5. Update Quick Links
 
 **Location:** Under the "🔗 Quick Links" heading
 
 **Steps:**
 1. Replace placeholder text with actual links:
-   - Resources & Documents → Link to database
-   - Business Goals → Link to database
-   - Main Dashboard → Link to main template
-   - Databases Backend → Link to backend page
+   - Tasks Database → Link to main Tasks database
+   - Projects Database → Link to main Projects database
+   - Main Dashboard → Link to main workspace/template page
 
 ---
 
@@ -161,7 +124,6 @@ Use this checklist when setting up each team member's dashboard:
 
 ### Dr. Saylor's Dashboard
 - [ ] Add "This Week at a Glance" 3-column layout
-- [ ] Add "My Performance Metrics" 3-column layout
 - [ ] Add "My Tasks" linked database view (filtered to Dr. Saylor)
 - [ ] Add "My Meetings" linked database view (filtered to Dr. Saylor)
 - [ ] Add "My Projects" linked database view (filtered to Dr. Saylor)
@@ -171,7 +133,6 @@ Use this checklist when setting up each team member's dashboard:
 
 ### Dr. John's Dashboard
 - [ ] Add "This Week at a Glance" 3-column layout
-- [ ] Add "My Performance Metrics" 3-column layout
 - [ ] Add "My Tasks" linked database view (filtered to Dr. John)
 - [ ] Add "My Meetings" linked database view (filtered to Dr. John)
 - [ ] Add "My Projects" linked database view (filtered to Dr. John)
@@ -181,7 +142,6 @@ Use this checklist when setting up each team member's dashboard:
 
 ### Lou Ann's Dashboard
 - [ ] Add "This Week at a Glance" 3-column layout
-- [ ] Add "My Performance Metrics" 3-column layout
 - [ ] Add "My Tasks" linked database view (filtered to Lou Ann)
 - [ ] Add "My Meetings" linked database view (filtered to Lou Ann)
 - [ ] Add "My Projects" linked database view (filtered to Lou Ann)
@@ -191,7 +151,6 @@ Use this checklist when setting up each team member's dashboard:
 
 ### Christina's Dashboard
 - [ ] Add "This Week at a Glance" 3-column layout
-- [ ] Add "My Performance Metrics" 3-column layout
 - [ ] Add "My Tasks" linked database view (filtered to Christina)
 - [ ] Add "My Meetings" linked database view (filtered to Christina)
 - [ ] Add "My Projects" linked database view (filtered to Christina)
@@ -201,7 +160,6 @@ Use this checklist when setting up each team member's dashboard:
 
 ### Tricia's Dashboard
 - [ ] Add "This Week at a Glance" 3-column layout
-- [ ] Add "My Performance Metrics" 3-column layout
 - [ ] Add "My Tasks" linked database view (filtered to Tricia)
 - [ ] Add "My Meetings" linked database view (filtered to Tricia)
 - [ ] Add "My Projects" linked database view (filtered to Tricia)
@@ -209,12 +167,11 @@ Use this checklist when setting up each team member's dashboard:
 - [ ] Customize "Today's Focus" priorities
 - [ ] Test all filters work correctly
 
-### Windy's Dashboard
+### Wendy's Dashboard
 - [ ] Add "This Week at a Glance" 3-column layout
-- [ ] Add "My Performance Metrics" 3-column layout
-- [ ] Add "My Tasks" linked database view (filtered to Windy)
-- [ ] Add "My Meetings" linked database view (filtered to Windy)
-- [ ] Add "My Projects" linked database view (filtered to Windy)
+- [ ] Add "My Tasks" linked database view (filtered to Wendy)
+- [ ] Add "My Meetings" linked database view (filtered to Wendy)
+- [ ] Add "My Projects" linked database view (filtered to Wendy)
 - [ ] Update Quick Links with actual page links
 - [ ] Customize "Today's Focus" priorities
 - [ ] Test all filters work correctly
@@ -229,20 +186,17 @@ Once all individual dashboards are set up:
    - [ ] Ensure all team member cards link to their respective dashboards
    - [ ] Test all links work correctly
 
-2. **Update Project Tracker**
-   - [ ] Mark Phase 3 as "✅ Complete"
-   - [ ] Update completion date
-   - [ ] Add notes about what was completed
-
-3. **Verify Everything Works**
+2. **Verify Everything Works**
    - [ ] Test each dashboard loads correctly
    - [ ] Verify database filters show correct data
    - [ ] Ensure all links navigate properly
-   - [ ] Check mobile view (Phase 8 will optimize this)
+   - [ ] Test on mobile (optional, but good to check)
 
-4. **Move to Phase 4**
-   - [ ] Review Phase 4 requirements
-   - [ ] Begin chiropractic-specific features
+3. **Team Onboarding**
+   - [ ] Share dashboards with team
+   - [ ] Give brief tour (5 minutes per person)
+   - [ ] Encourage usage for 1-2 weeks
+   - [ ] Collect feedback on what's working/not working
 
 ---
 

@@ -1,29 +1,59 @@
-# Van Every Family Chiropractic - Notion Mastermind Dashboard
+# Van Every Family Chiropractic - Task & Project Management System
 
-> **Comprehensive team management system with 8 implementation phases**
+> **Simple team task and project tracking for small practice teams**
 
-## 🎯 Project Overview
+## 🎯 What This Is
 
-This project builds a complete Notion mastermind dashboard template for Van Every Family Chiropractic Center, featuring:
+A basic task and project management system built on Notion for Van Every Family Chiropractic Center in Royal Oak, MI. Helps a team of 7 stay organized with:
 
-- 7 individual team member dashboards
-- 5 core databases (Tasks, Projects, Meetings, Resources, Business Goals)
-- Chiropractic-specific features
-- Automated workflows and intelligence
-- Mobile optimization
+- **Task tracking** - Who's doing what, by when, and what's the status
+- **Project management** - Group related tasks together by project
+- **Team visibility** - Individual dashboards so everyone sees their work + team overview
+- **Google Sheets sync** - (Future) Import practice metrics from Google Sheets into dashboards
 
-## 📊 Project Status
+## 🏥 Team
 
-| Phase | Status | Description |
-|-------|--------|-------------|
-| **Phase 1** | ✅ Complete | Visual Dashboard Redesign |
-| **Phase 2** | ✅ Complete | Database Architecture |
-| **Phase 3** | 🟡 In Progress | Individual Dashboard Upgrades |
-| **Phase 4** | ⏳ Planned | Chiropractic-Specific Features |
-| **Phase 5** | ⏳ Planned | Automation & Intelligence |
-| **Phase 6** | ⏳ Planned | Collaboration & Communication |
-| **Phase 7** | ⏳ Planned | Visual Design Polish |
-| **Phase 8** | ⏳ Planned | Mobile Optimization |
+- Dr. Zach (Owner)
+- Dr. Saylor
+- Dr. John
+- Lou Ann (Staff)
+- Christina (Staff)
+- Tricia (Staff)
+- Wendy (Staff)
+
+## 📦 What's Included
+
+### Core Components
+
+```
+VE Notion/
+├── ve_notion_client.py           # Notion API client
+├── build_dashboards.py           # Creates individual team dashboards
+├── dashboard_blocks.py           # Dashboard block templates
+├── config.json                   # Team members & database IDs
+├── requirements.txt              # Python dependencies
+├── Google_Sheets_Automation_Script.js  # (Future) Sheets sync
+├── Google_Sheets_Import/         # Example CSV templates
+├── README.md                     # This file
+├── SETUP.md                      # Setup instructions
+└── MANUAL_STEPS.md              # Post-build manual steps
+```
+
+### Notion Databases
+
+1. **Tasks** - Task assignments, due dates, status, priority
+2. **Projects** - Projects with related tasks and team assignments
+3. **Meetings** - Team meetings and events
+
+### Individual Dashboards
+
+Each team member gets their own dashboard with:
+
+- **Today's Focus** - Top 3 daily priorities
+- **My Tasks** - Filtered view of assigned tasks
+- **My Meetings** - Calendar of their meetings
+- **My Projects** - Projects they're working on
+- **Quick Links** - Shortcuts to important resources
 
 ## 🚀 Quick Start
 
@@ -36,166 +66,106 @@ This project builds a complete Notion mastermind dashboard template for Van Ever
 ### 2. Installation
 
 ```bash
-# Install dependencies
+# Install Python dependencies
 pip install -r requirements.txt
 
-# Copy environment template
+# Create .env file
 cp .env.example .env
 
-# Edit .env and add your Notion API key
-nano .env  # or your preferred editor
+# Add your Notion API key to .env
+# NOTION_API_KEY=secret_your_key_here
 ```
 
-### 3. Setup Notion Integration
-
-1. Go to https://www.notion.so/my-integrations
-2. Create a new integration (or use existing)
-3. Copy the "Internal Integration Token"
-4. Paste it in your `.env` file as `NOTION_API_KEY`
-5. In Notion, share ALL project pages with your integration:
-   - Open each page
-   - Click "..." → "Add connections"
-   - Select your integration
-
-### 4. Build Dashboards
+### 3. Build Team Dashboards
 
 ```bash
-# Build all dashboards (skips Dr. Zach's prototype)
+# Build dashboards for all 6 team members (skips Dr. Zach's prototype)
 python build_dashboards.py
 
 # Include Dr. Zach's dashboard
 python build_dashboards.py --include-dr-zach
+```
 
-# Clear existing content and rebuild (CAUTION!)
+### 4. Complete Manual Steps
+
+The Notion API **cannot** create linked database views. After running the build script, follow the instructions in `MANUAL_STEPS.md` to:
+
+- Add linked database views to each dashboard
+- Set up filters (e.g., "My Tasks" filtered to each team member)
+- Customize priorities
+
+**Time estimate:** 15-20 minutes per dashboard (~2 hours total)
+
+## 📖 Documentation
+
+- **[SETUP.md](SETUP.md)** - Detailed setup instructions with troubleshooting
+- **[MANUAL_STEPS.md](MANUAL_STEPS.md)** - Step-by-step manual configuration
+- **[config.json](config.json)** - Team member info and database IDs
+
+## 🔧 Usage Examples
+
+### Build all dashboards (skip Dr. Zach)
+```bash
+python build_dashboards.py
+```
+
+### Build all dashboards including Dr. Zach
+```bash
+python build_dashboards.py --include-dr-zach
+```
+
+### Clear existing content and rebuild (CAUTION!)
+```bash
 python build_dashboards.py --clear
 ```
 
-### 5. Test Connection
-
+### Test API connection
 ```bash
-# Test Notion API connection
-python notion_client.py
+python ve_notion_client.py
 ```
 
-## 📁 Project Structure
-
-```
-VE Notion/
-├── README.md                    # This file
-├── PROJECT_TRACKER.md           # Detailed phase tracking
-├── MANUAL_STEPS.md             # Steps that require manual Notion work
-├── config.json                  # Project configuration
-├── .env.example                 # Environment template
-├── .env                         # Your API key (gitignored)
-├── requirements.txt             # Python dependencies
-├── notion_client.py            # Notion API client
-├── dashboard_blocks.py         # Block templates
-├── build_dashboards.py         # Main dashboard builder
-├── phase4_builder.py           # Phase 4: Chiropractic features
-└── update_tracker.py           # Update project tracker
-```
-
-## 👥 Team Members
-
-1. **Dr. Saylor** - Doctor
-2. **Dr. Zach** - Doctor (Prototype complete)
-3. **Dr. John** - Doctor
-4. **Lou Ann** - Staff
-5. **Christina** - Staff
-6. **Tricia** - Staff
-7. **Windy** - Staff
-
-## 🗄️ Core Databases
-
-1. **Tasks** - Enhanced with Priority, Time Estimate, Labels, Department, Progress
-2. **Projects** - Project management with team assignments
-3. **Business Goals** - Strategic goal tracking
-4. **Resources & Documents** - Knowledge management with access control
-5. **Meetings** - Meeting management with categories and attendees
-
-## 🔗 Important Links
-
-- **Project Tracker**: https://www.notion.so/2a380ff9d4f58134a8dbdaf4051913c8
-- **Main Template**: https://www.notion.so/2a380ff9d4f5817b8a11eca658f9a815
-- **Dr. Zach's Prototype**: https://www.notion.so/2a380ff9d4f5816b891bcd522e7fff7d
-- **Databases Backend**: https://www.notion.so/2a380ff9d4f5811bbeecd32ec64c52c3
-
-## ⚠️ API Limitations
+## ⚠️ Notion API Limitations
 
 The Notion API **CANNOT** create:
-- Linked database views
-- Database inline views
-- Some advanced block types
 
-These must be added **manually** in Notion. See `MANUAL_STEPS.md` for instructions.
+- ❌ Linked database views
+- ❌ Inline database views
+- ❌ Some advanced block types
 
-## 📝 Dashboard Structure
+These must be added manually in Notion after running the build script. See `MANUAL_STEPS.md` for detailed instructions.
 
-Each individual dashboard follows Dr. Zach's prototype:
+## 🔮 Future Plans
 
-1. **Hero Section** - Name and icon
-2. **Today's Focus** - Top 3 daily priorities
-3. **This Week at a Glance** - Task/Meeting/Project counts
-4. **My Performance Metrics** - Goal tracking
-5. **My Tasks** - Filtered task view
-6. **My Meetings** - Filtered meeting view
-7. **My Projects** - Filtered project view
-8. **Quick Links** - Important resources
+### Next Phase: Google Sheets Sync
 
-## 🔄 Phase 3 Progress
+Once task and project management is working well, we'll add sync capabilities to pull practice statistics from Google Sheets (ChiroTouch metrics like new patients, collections, visit data) into Notion dashboards.
 
-✅ **Completed:**
-- Dr. Zach's prototype dashboard created
-
-⏳ **In Progress:**
-- Building 6 remaining dashboards:
-  - [ ] Dr. Saylor
-  - [ ] Dr. John
-  - [ ] Lou Ann
-  - [ ] Christina
-  - [ ] Tricia
-  - [ ] Windy
-
-## 🎯 Next Steps After Phase 3
-
-1. **Manual Database Views** - Add linked database views to each dashboard
-2. **Phase 4** - Implement chiropractic-specific features:
-   - Practice Performance Dashboard
-   - Clinical Resources Hub
-   - TTC Technique Database
-   - Continuing Education Tracker
-   - License Renewal Reminders
-   - Equipment Maintenance Log
-
-## 🆘 Troubleshooting
+## 🛠️ Troubleshooting
 
 ### "Notion API key not found"
 - Make sure you created `.env` file from `.env.example`
-- Check that `NOTION_API_KEY` is set correctly
+- Check that `NOTION_API_KEY` is set correctly in `.env`
 
 ### "Error retrieving page"
 - Verify the page ID in `config.json` is correct
-- Make sure you shared the page with your integration
+- Make sure you shared the page with your integration in Notion
 - Check that the integration has proper permissions
 
 ### "Error appending blocks"
 - Some blocks may have invalid structure
 - Check Notion API documentation for block requirements
-- Verify you're not exceeding rate limits
+- You may be hitting rate limits - wait a moment and try again
 
 ## 📚 Resources
 
 - [Notion API Documentation](https://developers.notion.com/)
-- [notion-sdk-py](https://github.com/ramnes/notion-sdk-py)
-- [Project Tracker in Notion](https://www.notion.so/2a380ff9d4f58134a8dbdaf4051913c8)
+- [notion-sdk-py GitHub](https://github.com/ramnes/notion-sdk-py)
 
-## 🤝 Contributing
+## 🔒 Security
 
-This is a custom project for Van Every Family Chiropractic. For questions or issues:
-
-1. Check `MANUAL_STEPS.md` for manual instructions
-2. Review `PROJECT_TRACKER.md` for phase details
-3. Contact project administrator
+- Never commit your `.env` file to git
+- Keep your Notion API key private
+- The `.gitignore` file is configured to exclude `.env` automatically
 
 ## 📄 License
 
@@ -203,6 +173,14 @@ Private project for Van Every Family Chiropractic Center.
 
 ---
 
-**Last Updated:** November 6, 2025
-**Current Phase:** Phase 3 - Individual Dashboard Upgrades
-**Next Milestone:** Complete all 6 remaining dashboards
+**Last Updated:** November 13, 2025  
+**Current Focus:** Basic task & project management for 7-person team  
+**Next Step:** Validate system works, then add Google Sheets sync for practice metrics
+
+---
+
+## 💡 Philosophy
+
+**Keep it simple.** This is deliberately focused on just task and project tracking. No fancy automation, no complex integrations (yet), no feature creep.
+
+Once this works and the team is using it, we can add more. But not before.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Build Individual Team Member Dashboards
-Completes Phase 3 of the Mastermind Dashboard project
+Creates personalized task & project management dashboards for each team member
 """
 
 import json
@@ -165,8 +165,8 @@ def main():
     """Main entry point."""
     print("""
 ╔══════════════════════════════════════════════════════════╗
-║  VAN EVERY CHIROPRACTIC MASTERMIND DASHBOARD BUILDER     ║
-║  Phase 3: Individual Dashboard Creation                  ║
+║  VAN EVERY CHIROPRACTIC TASK & PROJECT MANAGEMENT        ║
+║  Individual Dashboard Builder                            ║
 ╚══════════════════════════════════════════════════════════╝
     """)
 
@@ -202,7 +202,7 @@ def main():
             print("   1. Visit each dashboard in Notion")
             print("   2. Add linked database views manually (API limitation)")
             print("   3. Customize the 'Today's Focus' priorities")
-            print("   4. Update the Project Tracker to mark Phase 3 complete")
+            print("   4. See MANUAL_STEPS.md for detailed instructions (~15-20 min per dashboard)")
         else:
             print("\n⚠️  Some dashboards failed. Please check errors above.")
             sys.exit(1)

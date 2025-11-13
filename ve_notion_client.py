@@ -112,10 +112,10 @@ if __name__ == "__main__":
         client = NotionDashboardClient()
         print("✓ Notion client initialized successfully")
 
-        # Test by retrieving the project tracker
-        tracker_id = client.config['notion_pages']['project_tracker']
-        print(f"Testing connection by retrieving project tracker...")
-        page = client.get_page(tracker_id)
+        # Test by retrieving the main template
+        main_id = client.config['notion_pages']['main_template']
+        print(f"Testing connection by retrieving main template...")
+        page = client.get_page(main_id)
         print(f"✓ Successfully retrieved page: {page.get('url', 'Unknown')}")
 
     except Exception as e:

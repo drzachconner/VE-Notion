@@ -188,10 +188,16 @@ class DashboardBlockBuilder:
     @classmethod
     def build_dashboard_structure(cls, member_name: str, member_icon: str) -> List[Dict[str, Any]]:
         """
-        Build the complete dashboard structure based on Dr. Zach's prototype.
+        Build clean dashboard structure for team member.
+        
+        Layout:
+        1. Hero section with name
+        2. Navigation (All Tasks | All Projects | All Events)
+        3. My Tasks section (with link to All Tasks)
+        4. My Events section (with link to Calendar)
+        5. My Projects section (with link to All Projects)
 
         Note: Linked database views CANNOT be created via API and must be added manually.
-        This creates placeholders with instructions.
         """
         blocks = []
 
@@ -199,95 +205,58 @@ class DashboardBlockBuilder:
         blocks.append(cls.create_heading_1(f"{member_icon} {member_name}'s Dashboard", "blue_background"))
         blocks.append(cls.create_divider())
 
-        # Today's Focus Section
-        blocks.append(cls.create_heading_2("🎯 Today's Focus", "orange_background"))
-        blocks.append(cls.create_callout(
-            "Set your top 3 priorities for today. Focus on what matters most!",
-            "⭐",
-            "yellow_background"
-        ))
-        blocks.append(cls.create_bullet_list_item("Priority 1: [Add your first priority]"))
-        blocks.append(cls.create_bullet_list_item("Priority 2: [Add your second priority]"))
-        blocks.append(cls.create_bullet_list_item("Priority 3: [Add your third priority]"))
-        blocks.append(cls.create_divider())
-
-        # This Week at a Glance Section
-        blocks.append(cls.create_heading_2("📊 This Week at a Glance", "blue_background"))
+        # Navigation Section (Always visible)
+        blocks.append(cls.create_heading_3("☰ Navigation", "gray_background"))
         blocks.append(cls.create_paragraph(
-            "⚠️ NOTE: The 3 metric cards below need to be created manually in Notion as the API cannot create linked database views.",
-            italic=True,
-            color="gray"
-        ))
-        blocks.append(cls.create_callout(
-            "📋 Manual Step Required: Create 3 columns here with callout blocks showing:\n• Column 1: My Tasks (with count)\n• Column 2: My Meetings (with count)\n• Column 3: My Projects (with count)",
-            "⚙️",
-            "gray_background"
-        ))
-        blocks.append(cls.create_divider())
-
-        # Performance Metrics Section
-        blocks.append(cls.create_heading_2("📈 My Performance Metrics", "green_background"))
-        blocks.append(cls.create_paragraph(
-            "⚠️ NOTE: The 3 tracking cards below need to be created manually in Notion.",
-            italic=True,
-            color="gray"
-        ))
-        blocks.append(cls.create_callout(
-            "📋 Manual Step Required: Create 3 columns here with callout blocks for:\n• Column 1: Goals Progress\n• Column 2: Completed Tasks This Month\n• Column 3: Upcoming Milestones",
-            "⚙️",
-            "gray_background"
-        ))
-        blocks.append(cls.create_divider())
-
-        # My Tasks Section
-        blocks.append(cls.create_heading_2("✅ My Tasks", "red_background"))
-        blocks.append(cls.create_callout(
-            "📋 Manual Step Required: Add a linked database view of the Tasks database here, filtered to show only your tasks.",
-            "⚙️",
-            "gray_background"
-        ))
-        blocks.append(cls.create_paragraph(
-            "To add the Tasks database view:\n1. Type '/linked' and select 'Create linked database'\n2. Search for 'Tasks' database\n3. Add filter: Assigned to → Contains → [Your Name]",
+            "📋 Manual Step: Add page links here → All Tasks | All Projects | All Events",
             italic=True,
             color="gray"
         ))
         blocks.append(cls.create_divider())
 
-        # My Meetings Section
-        blocks.append(cls.create_heading_2("📅 My Meetings", "purple_background"))
-        blocks.append(cls.create_callout(
-            "📋 Manual Step Required: Add a linked database view of the Meetings database here, filtered to show only your meetings.",
-            "⚙️",
-            "gray_background"
-        ))
+        # 🗂️ My Tasks Section
+        blocks.append(cls.create_heading_2("🗂️ My Tasks", "blue_background"))
         blocks.append(cls.create_paragraph(
-            "To add the Meetings database view:\n1. Type '/linked' and select 'Create linked database'\n2. Search for 'Meetings' database\n3. Add filter: Attendees → Contains → [Your Name]",
+            "📋 Manual Step: Add linked database view of Tasks here (Table view, filtered: Assigned to = " + member_name + ")",
             italic=True,
             color="gray"
         ))
-        blocks.append(cls.create_divider())
-
-        # My Projects Section
-        blocks.append(cls.create_heading_2("🎯 My Projects", "blue_background"))
-        blocks.append(cls.create_callout(
-            "📋 Manual Step Required: Add a linked database view of the Projects database here, filtered to show only your projects.",
-            "⚙️",
-            "gray_background"
-        ))
         blocks.append(cls.create_paragraph(
-            "To add the Projects database view:\n1. Type '/linked' and select 'Create linked database'\n2. Search for 'Projects' database\n3. Add filter: Team Members → Contains → [Your Name]",
+            "Show columns: Name | Due Date | Priority | Related Project | Status",
             italic=True,
             color="gray"
         ))
+        blocks.append(cls.create_paragraph("→ View All Tasks", bold=True))
         blocks.append(cls.create_divider())
 
-        # Quick Links Section
-        blocks.append(cls.create_heading_2("🔗 Quick Links", "default"))
-        blocks.append(cls.create_paragraph("Important resources and shortcuts:"))
-        blocks.append(cls.create_bullet_list_item("📚 [Add link to Resources & Documents database]"))
-        blocks.append(cls.create_bullet_list_item("🎯 [Add link to Business Goals database]"))
-        blocks.append(cls.create_bullet_list_item("🏠 [Add link to Main Dashboard]"))
-        blocks.append(cls.create_bullet_list_item("📊 [Add link to Databases Backend]"))
+        # 📅 My Events Section
+        blocks.append(cls.create_heading_2("📅 My Events", "purple_background"))
+        blocks.append(cls.create_paragraph(
+            "📋 Manual Step: Add linked database view of Events/Meetings here (List view, filtered: Attendees = " + member_name + ")",
+            italic=True,
+            color="gray"
+        ))
+        blocks.append(cls.create_paragraph(
+            "Show upcoming events only (sorted by date ascending)",
+            italic=True,
+            color="gray"
+        ))
+        blocks.append(cls.create_paragraph("→ View Calendar", bold=True))
+        blocks.append(cls.create_divider())
+
+        # 📊 My Projects Section
+        blocks.append(cls.create_heading_2("📊 My Projects", "green_background"))
+        blocks.append(cls.create_paragraph(
+            "📋 Manual Step: Add linked database view of Projects here (Table view, filtered: Team Members = " + member_name + ")",
+            italic=True,
+            color="gray"
+        ))
+        blocks.append(cls.create_paragraph(
+            "Show columns: Name | Status | Related Tasks Count",
+            italic=True,
+            color="gray"
+        ))
+        blocks.append(cls.create_paragraph("→ View All Projects", bold=True))
 
         return blocks
 

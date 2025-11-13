@@ -1,6 +1,6 @@
-# Setup Guide - Van Every Chiropractic Dashboard
+# Setup Guide - Van Every Task & Project Management
 
-> **Step-by-step instructions to get started**
+> **Step-by-step instructions to get your team management system running**
 
 ---
 
@@ -10,7 +10,7 @@
 
 1. Go to https://www.notion.so/my-integrations
 2. Click **"+ New integration"**
-3. Name it: `VE Chiro Dashboard Builder`
+3. Name it: `VE Task Management Builder`
 4. Select your workspace
 5. Click **"Submit"**
 6. Copy the **"Internal Integration Token"** (starts with `secret_`)
@@ -19,7 +19,7 @@
 
 ```bash
 # Navigate to project directory
-cd "/Users/zachconnermba/Library/Mobile Documents/com~apple~CloudDocs/Documents/Cursor/VE Notion"
+cd "/Users/zacharyrilesconnerdc/Library/Mobile Documents/com~apple~CloudDocs/Documents/Cursor/VE Notion"
 
 # Create .env file from template
 cp .env.example .env
@@ -29,25 +29,26 @@ nano .env  # or use any text editor
 ```
 
 In `.env`, replace `your_notion_integration_token_here` with your actual token:
+
 ```
 NOTION_API_KEY=secret_your_actual_token_here
 ```
 
 ### 3. Share Notion Pages with Integration
 
-For EACH of these pages in Notion:
+For EACH of these pages in Notion, you need to give your integration access:
 
-- **Project Tracker**: https://www.notion.so/2a380ff9d4f58134a8dbdaf4051913c8
-- **Main Template**: https://www.notion.so/2a380ff9d4f5817b8a11eca658f9a815
-- **Dr. Zach's Prototype**: https://www.notion.so/2a380ff9d4f5816b891bcd522e7fff7d
-- **Databases Backend**: https://www.notion.so/2a380ff9d4f5811bbeecd32ec64c52c3
-- **All 7 Individual Dashboards** (see config.json)
+- **Main Template** (workspace page)
+- **All 7 Individual Team Dashboards** (see config.json for IDs)
+- **Tasks Database**
+- **Projects Database**
+- **Meetings Database**
 
-Do this:
+For each page:
 1. Open the page in Notion
 2. Click **"..."** (three dots) in top-right
 3. Click **"Add connections"**
-4. Select **"VE Chiro Dashboard Builder"**
+4. Select your integration (e.g., "VE Task Management Builder")
 5. Click **"Confirm"**
 
 ### 4. Install Python Dependencies
@@ -61,10 +62,11 @@ pip3 install -r requirements.txt
 
 ```bash
 # Test that everything works
-python3 notion_client.py
+python3 ve_notion_client.py
 ```
 
 You should see:
+
 ```
 ✓ Notion client initialized successfully
 Testing connection by retrieving project tracker...
@@ -73,17 +75,17 @@ Testing connection by retrieving project tracker...
 
 ---
 
-## 🚀 Usage
+## 🚀 Build Team Dashboards
 
-### Build All Individual Dashboards (Phase 3)
+### Build Individual Dashboards for All Team Members
 
 ```bash
-# Build 6 remaining dashboards (skips Dr. Zach's prototype)
+# Build 6 dashboards (skips Dr. Zach's prototype)
 python3 build_dashboards.py
 ```
 
 **What this does:**
-- Builds dashboards for: Dr. Saylor, Dr. John, Lou Ann, Christina, Tricia, Windy
+- Builds dashboards for: Dr. Saylor, Dr. John, Lou Ann, Christina, Tricia, Wendy
 - Adds structure, sections, and placeholder instructions
 - Sets page titles and icons
 
@@ -91,16 +93,12 @@ python3 build_dashboards.py
 - Add linked database views (see MANUAL_STEPS.md)
 - This takes ~15-20 minutes per dashboard
 
-### Preview Phase 4 Features
+### Include Dr. Zach's Dashboard
 
 ```bash
-# Generate Phase 4 block structures
-python3 phase4_builder.py
+# Build all 7 dashboards including Dr. Zach
+python3 build_dashboards.py --include-dr-zach
 ```
-
-**What this does:**
-- Creates block structures for 6 chiropractic-specific pages
-- Provides instructions for creating pages in Notion
 
 ### Clear and Rebuild (CAUTION!)
 
@@ -109,48 +107,49 @@ python3 phase4_builder.py
 python3 build_dashboards.py --clear
 ```
 
-Only use this if you want to start fresh.
+⚠️ Only use this if you want to start completely fresh. This will delete all existing content from the dashboards.
 
 ---
 
 ## 📝 Post-Build Steps
 
-After running `build_dashboards.py`:
+After running `build_dashboards.py` successfully:
 
 ### 1. Complete Manual Database Views (Required)
 
-See `MANUAL_STEPS.md` for detailed instructions.
+**The Notion API cannot create linked database views**, so you must add them manually.
 
-For each dashboard, add:
-- [ ] "This Week at a Glance" metric cards
-- [ ] "My Performance Metrics" tracking cards
-- [ ] "My Tasks" linked database view
-- [ ] "My Meetings" linked database view
-- [ ] "My Projects" linked database view
-- [ ] Quick Links updates
+See `MANUAL_STEPS.md` for detailed step-by-step instructions.
 
-**Time estimate:** 15-20 minutes per dashboard × 6 dashboards = ~2 hours
+For each team member's dashboard, add:
 
-### 2. Update Main Dashboard
+- [ ] "My Tasks" linked database view (filtered to that team member)
+- [ ] "My Meetings" linked database view (filtered to that team member)
+- [ ] "My Projects" linked database view (filtered to that team member)
+- [ ] Customize "Today's Focus" priorities
+- [ ] Update Quick Links with actual page links
 
-1. Open Main Template: https://www.notion.so/2a380ff9d4f5817b8a11eca658f9a815
-2. Find the team member cards section
-3. Update each card to link to the corresponding dashboard
-4. Test that all links work
+**Time estimate:** 15-20 minutes per dashboard × 6-7 dashboards = ~2 hours
 
-### 3. Update Project Tracker
+### 2. Test Everything
 
-1. Open Project Tracker: https://www.notion.so/2a380ff9d4f58134a8dbdaf4051913c8
-2. Mark Phase 3 as ✅ Complete
-3. Add completion date
-4. Add any notes about customizations made
+For each dashboard:
 
-### 4. Team Onboarding
+1. Open the dashboard in Notion
+2. Verify the linked database views show correct data
+3. Test filters (each person should only see their tasks/meetings/projects)
+4. Click through Quick Links to ensure they work
+5. Have the team member customize their "Today's Focus" section
 
-1. Share dashboards with team members
-2. Give brief tour of features
-3. Help customize "Today's Focus" sections
-4. Answer questions
+### 3. Team Onboarding
+
+1. Share dashboard links with each team member
+2. Give a brief 5-minute tour:
+   - How to add tasks
+   - How to update task status
+   - How to set priorities
+   - Where to find their meetings and projects
+3. Encourage them to use it for 1 week and provide feedback
 
 ---
 
@@ -159,6 +158,7 @@ For each dashboard, add:
 ### Error: "Notion API key not found"
 
 **Solution:**
+
 ```bash
 # Check that .env file exists
 ls -la .env
@@ -180,53 +180,64 @@ cat .env
 **Solution:**
 1. Verify page ID matches the URL (last part after last `/`)
 2. Share page with integration (see Step 3 above)
-3. Recreate integration with proper permissions
+3. Check integration permissions at https://www.notion.so/my-integrations
 
 ### Error: "Error appending blocks"
 
 **Possible causes:**
 1. Rate limiting (too many requests too fast)
 2. Invalid block structure
-3. Malformed data
+3. Network issues
 
 **Solution:**
 1. Wait 1-2 minutes and try again
 2. Check Notion API status: https://status.notion.so/
-3. Review error message for specific block type
+3. Review error message for specific block type that failed
 
 ### Error: "ModuleNotFoundError: No module named 'notion_client'"
 
 **Solution:**
+
 ```bash
 # Reinstall dependencies
 pip3 install -r requirements.txt
 
 # Or install directly
-pip3 install notion-client python-dotenv requests
+pip3 install notion-client python-dotenv
 ```
 
-### "I can't find the database to link"
+### "I can't find the database to link in Notion"
 
 **Solution:**
+
 Make sure the database page is shared with your integration:
-1. Open the database page (e.g., Tasks database)
-2. Click "..." → "Add connections"
-3. Select your integration
+
+1. Find the database in Notion (Tasks, Projects, or Meetings)
+2. Open the database page
+3. Click "..." → "Add connections"
+4. Select your integration
+5. Click "Confirm"
+
+Now try creating the linked view again.
 
 ### "The script completed but I don't see changes in Notion"
 
 **Solution:**
+
 1. Refresh the Notion page (Cmd/Ctrl + R)
 2. Check that you're looking at the correct page
-3. Verify script output shows success messages
-4. Check Notion app vs. web (try both)
+3. Verify script output shows success messages (✓)
+4. Try both Notion desktop app and web browser
 
 ### "I want to undo changes"
 
 **Solution:**
+
 1. Use Notion's page history:
+   - Open the page
    - Click "..." → "Page history"
-   - Restore to previous version
+   - Select a previous version
+   - Click "Restore"
 2. Or use the `--clear` flag to rebuild from scratch
 
 ---
@@ -235,43 +246,52 @@ Make sure the database page is shared with your integration:
 
 ### 1. Test First
 
-Always test on one dashboard before running for all:
+Always test on one dashboard before running for all team members:
 
 ```python
-# Edit build_dashboards.py temporarily
-# Comment out other team members, test with one
+# Option: Edit config.json temporarily and comment out other team members
+# Test with one dashboard first
 ```
 
-### 2. Backup Pages
+### 2. Backup Important Pages
 
-Before major changes:
+Before making major changes:
+
 1. Duplicate important pages in Notion
-2. Name them with date: "Main Dashboard BACKUP 2025-11-06"
+2. Name them with a date: "Main Dashboard BACKUP 2025-11-13"
 
-### 3. Incremental Changes
+### 3. Start Simple
 
-Build in phases:
-1. Phase 3: Individual dashboards
-2. Manual database views
-3. Team testing
-4. Phase 4: Chiropractic features
+Build the basic structure first:
 
-### 4. Version Control
+1. ✅ Build dashboards with Python script
+2. ✅ Add manual database views
+3. ✅ Get team using it for 1-2 weeks
+4. ⏳ Collect feedback
+5. ⏳ Add improvements based on actual usage
 
-Track your changes:
+### 4. Version Control (Optional)
+
+Track your changes with git:
+
 ```bash
-# Create a git repository (optional)
+# Initialize git repository
 git init
+
+# Add files (will exclude .env automatically via .gitignore)
 git add .
-git commit -m "Initial setup"
+
+# Commit
+git commit -m "Initial setup complete"
 ```
 
-### 5. Documentation
+### 5. Keep Documentation Updated
 
-Keep notes:
-- What customizations you made
-- Which team members have which permissions
-- Any issues encountered
+When you customize the system:
+
+- Update `config.json` with any new team members
+- Note what manual customizations you made
+- Document any issues you encountered
 
 ---
 
@@ -279,70 +299,61 @@ Keep notes:
 
 | File | Purpose |
 |------|---------|
-| `README.md` | Project overview and reference |
-| `SETUP.md` | **This file** - Setup instructions |
-| `MANUAL_STEPS.md` | Manual steps after automation |
-| `PROJECT_TRACKER.md` | Phase tracking and progress |
-| `config.json` | Page IDs and configuration |
-| `.env` | Your API key (DO NOT COMMIT) |
-| `notion_client.py` | Notion API wrapper |
-| `dashboard_blocks.py` | Block templates |
-| `build_dashboards.py` | Main dashboard builder |
-| `phase4_builder.py` | Phase 4 features |
-
----
-
-## 🎯 What's Next?
-
-After setup is complete:
-
-1. ✅ **Complete Phase 3**
-   - Run `build_dashboards.py`
-   - Complete manual steps
-   - Test all dashboards
-
-2. 🎯 **Begin Phase 4**
-   - Review Phase 4 plan
-   - Create chiropractic-specific pages
-   - Run `phase4_builder.py`
-
-3. 🤖 **Future Phases**
-   - Phase 5: Automation & Intelligence
-   - Phase 6: Collaboration
-   - Phase 7: Visual Polish
-   - Phase 8: Mobile Optimization
-
----
-
-## 🆘 Need Help?
-
-1. Check `MANUAL_STEPS.md` for manual instructions
-2. Review `PROJECT_TRACKER.md` for phase details
-3. Check Notion API docs: https://developers.notion.com/
-4. Review error messages carefully
-5. Check Notion integration settings
+| `README.md` | Project overview and quick reference |
+| `SETUP.md` | **This file** - Detailed setup instructions |
+| `MANUAL_STEPS.md` | Manual steps for database views (Notion API limitation) |
+| `config.json` | Team members, page IDs, database IDs |
+| `.env` | Your Notion API key (DO NOT COMMIT TO GIT) |
+| `ve_notion_client.py` | Notion API client wrapper |
+| `dashboard_blocks.py` | Dashboard block templates |
+| `build_dashboards.py` | Main dashboard builder script |
+| `requirements.txt` | Python dependencies |
+| `Google_Sheets_Automation_Script.js` | (Future) Google Sheets sync |
 
 ---
 
 ## 🔒 Security Notes
 
 ### DO NOT:
+
 - ❌ Commit `.env` file to git
 - ❌ Share your API token publicly
 - ❌ Screenshot/copy token to insecure locations
+- ❌ Give integration access to unrelated Notion pages
 
 ### DO:
+
 - ✅ Keep `.env` file local only
-- ✅ Regenerate token if exposed
-- ✅ Use `.gitignore` to exclude sensitive files
-- ✅ Limit integration permissions to necessary pages only
+- ✅ Regenerate token if accidentally exposed
+- ✅ Use `.gitignore` to exclude `.env` (already configured)
+- ✅ Only give integration access to pages it needs
 
 ---
 
-**Setup Complete?** Move on to building dashboards! 🚀
+## 🎯 Next Steps After Setup
+
+1. **Complete the manual database views** (see MANUAL_STEPS.md)
+2. **Test with your team for 1-2 weeks**
+3. **Collect feedback** - What's working? What's not?
+4. **Iterate and improve** based on actual usage
+5. **(Future) Add Google Sheets sync** for practice metrics
+
+---
+
+## 🆘 Need More Help?
+
+1. Check `MANUAL_STEPS.md` for detailed manual instructions
+2. Review Notion API docs: https://developers.notion.com/
+3. Check Notion API status: https://status.notion.so/
+4. Review error messages carefully - they usually tell you what's wrong
+5. Test your integration permissions in Notion settings
+
+---
+
+**Setup Complete?** Ready to build dashboards! 🚀
 
 ```bash
 python3 build_dashboards.py
 ```
 
-Then follow `MANUAL_STEPS.md` to finish Phase 3.
+Then follow `MANUAL_STEPS.md` to complete the setup.
