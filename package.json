@@ -1,0 +1,41 @@
+{
+  "name": "vanevery-practice-orchestration-system",
+  "version": "2.0.0",
+  "description": "Van Every Family Chiropractic - Complete Practice Orchestration System (Unified Monorepo)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "tsc",
+    "deploy": "vercel --prod",
+    "type-check": "tsc --noEmit",
+    "setup:clickup": "ts-node scripts/setup-clickup.ts",
+    "setup:slack": "ts-node scripts/setup-slack.ts",
+    "test:slack": "ts-node scripts/test-slack-message.ts",
+    "test:workflow": "ts-node scripts/test-lead-workflow.ts"
+  },
+  "keywords": [
+    "gohighlevel",
+    "chirohd",
+    "clickup",
+    "slack",
+    "blotato",
+    "chiropractic",
+    "automation",
+    "practice-management"
+  ],
+  "author": "Van Every Family Chiropractic Center",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/node": "^3.0.12",
+    "axios": "^1.6.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "googleapis": "^128.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vercel": "^33.0.1"
+  }
+}
