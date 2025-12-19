@@ -69,10 +69,11 @@ vercel env add SLACK_FRONT_DESK_CHANNEL_ID production
 | `CLICKUP_TIER1_LIST_ID` | `901708714012` | Tier 1 - Low Priority Leads list |
 | `SLACK_BOT_TOKEN` | `xoxb-YOUR-SLACK-BOT-TOKEN` | Slack bot authentication |
 | `SLACK_FRONT_DESK_CHANNEL_ID` | `C020A92H334` | #front-desk channel |
+| `GHL_API_KEY` | `pit-YOUR-GHL-PRIVATE-INTEGRATION-TOKEN` | GoHighLevel API authentication |
+| `GHL_LOCATION_ID` | `WoS90qnGGmY3rjd0mkjC` | Your GHL location ID |
 
-**Note:** When you add GHL integration later, you'll also need:
-- `GHL_API_KEY` - Your GoHighLevel API key
-- `GHL_LOCATION_ID` - Your GHL location ID
+**Note:** For ChiroHD integration (coming next), you'll also need:
+- `CHIROHD_WEBHOOK_SECRET` - ChiroHD webhook secret
 
 ## Step 4: Deploy
 
